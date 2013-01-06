@@ -48,19 +48,18 @@ class C5917 {
 			  }
 		      for(int i=0;i<n;i++)
 			  {
-		    	  if(v[i]==1)
-		    		  System.err.println(1);
+		    	  if((v[i]==1)||(v[i]==0))
+		    		  System.out.println(1);
 		    	  else
 		    	  {
 			    	  double ln_n=Math.log((double)v[i]);
 			    	  double ln_nf=(Math.log(2.0)+Math.log(pi)+ln_n)/2+v[i]*(ln_n-1);
 			    	  long ret=(long) Math.ceil(ln_nf/Math.log(10.0));
-				      System.err.println(ret);
+				      System.out.println(ret);
 		    	  }
 		      }
 		    } catch (IOException e) {
 		      System.err.println("Unexpected IO ERROR: " + e);
 		    }
 	}
-
 }
