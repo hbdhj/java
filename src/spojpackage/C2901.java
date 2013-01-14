@@ -29,7 +29,7 @@ class C2901 {
         String line = is.readLine();
         int n = Integer.parseInt(line);
         BigInteger[] v=new BigInteger[n*3];
-        for(int i=0;i<n*2;i++)
+        for(int i=0;i<n;i++)
         {
           	line = is.readLine();
           	String[] nums=line.split(" ");
