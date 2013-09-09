@@ -19,19 +19,19 @@ public class HelloWorld
 	{
 		try{
 			String strInput = "Administrator";
-			String strKey = "&dv0~4!q";
-			String strIv = "0n@eh2oq";
+			String strKey = "&dv0~4!qHJ^&4510";
+			String strIv = "0n@eh2oqqef&&83#";
 			
 			byte[] input = strInput.getBytes();
 			byte[] keyBytes = strKey.getBytes();
 			byte[] ivBytes = strIv.getBytes();
 			
 			// wrap key data in Key/IV specs to pass to cipher
-			SecretKeySpec key = new SecretKeySpec(keyBytes, "DES");
+			SecretKeySpec key = new SecretKeySpec(keyBytes, "AES");
 			IvParameterSpec ivSpec = new IvParameterSpec(ivBytes);
 			// create the cipher with the algorithm you choose
 			// see javadoc for Cipher class for more info, e.g.
-			Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+			Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
 		
 			// Encryption 
 			cipher.init(Cipher.ENCRYPT_MODE, key, ivSpec);
