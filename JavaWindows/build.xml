@@ -1,0 +1,58 @@
+<project name="JavaWindows" basedir="." default="main">
+	<property name="src.dir" value="src/com/javawindows"/>
+	<property name="build.dir" value="build"/>
+	<property name="classes.dir" value="${build.dir}/classes"/>
+	<property name="jar.dir" value="${build.dir}/jar"/>
+	<property name="sign.dir" value="${build.dir}/sign"/>
+	<property name="storepass" value="StorePass"/>
+	<property name="keystore" value="${build.dir}/keystore"/>
+	<property name="main-class" value="com.javawindows.HelloWorldSwing"/>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${jar.dir}"/>
+		<jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}"/>
+			</manifest>
+		</jar>
+	</target>
+	
+	<target name="genkey">
+	    <genkey alias="swing" storepass="${storepass}" keystore="${keystore}" validity="3650" verbose="true">
+		    <dname>
+		        <param name="CN" value="kff" />
+		        <param name="OU" value="ned" />
+		        <param name="O" value="jdsu.com" />
+		        <param name="C" value="US" />
+		    </dname>
+        </genkey>
+	</target>
+	
+	<target name="jar-sign" depends="jar">
+	    <signjar destDir="${sign.dir}"
+	        alias="swing" keystore="${keystore}"
+	        storepass="apacheant"
+	        preservelastmodified="true">
+	        <path>
+	            <fileset dir="${jar.dir}" includes="**/*.jar" />
+	        </path>
+	        <flattenmapper />
+	    </signjar>
+	</target>
+		
+	<target name="run" depends="jar">
+		<java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
+	</target>
+	
+	<target name="clean-build" depends="clean,jar"/>
+	<target name="main" depends="clean,run"/>
+</project>
