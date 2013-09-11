@@ -38,9 +38,10 @@
 	</target>
 	
 	<target name="jar-sign" depends="jar">
-	    <signjar destDir="${sign.dir}"
-	        alias="swing" keystore="${keystore}"
-	        storepass="apacheant"
+		<mkdir dir="${sign.dir}"/>
+		<signjar destDir="${sign.dir}"
+	        alias="swing" keystore="swing.jks"
+	        storepass="swingpass"
 	        preservelastmodified="true">
 	        <path>
 	            <fileset dir="${jar.dir}" includes="**/*.jar" />
@@ -54,5 +55,5 @@
 	</target>
 	
 	<target name="clean-build" depends="clean,jar"/>
-	<target name="main" depends="clean,run"/>
+	<target name="main" depends="clean,jar-sign"/>
 </project>
