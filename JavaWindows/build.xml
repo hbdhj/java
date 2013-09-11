@@ -4,8 +4,9 @@
 	<property name="classes.dir" value="${build.dir}/classes"/>
 	<property name="jar.dir" value="${build.dir}/jar"/>
 	<property name="sign.dir" value="${build.dir}/sign"/>
-	<property name="storepass" value="StorePass"/>
-	<property name="keystore" value="${build.dir}/keystore"/>
+	<property name="mystorepass" value="swingpass"/>
+	<property name="myalias" value="Swing"/>
+	<property name="mykeystore" value="${build.dir}/swing.jks"/>
 	<property name="main-class" value="com.javawindows.HelloWorldSwing"/>
 
 	<target name="clean">
@@ -27,7 +28,7 @@
 	</target>
 	
 	<target name="genkey">
-	    <genkey alias="swing" storepass="${storepass}" keystore="${keystore}" validity="3650" verbose="true">
+	    <genkey alias="${myalias}" storepass="${mystorepass}" keystore="${mykeystore}" validity="3650" verbose="true">
 		    <dname>
 		        <param name="CN" value="kff" />
 		        <param name="OU" value="ned" />
@@ -37,11 +38,11 @@
         </genkey>
 	</target>
 	
-	<target name="jar-sign" depends="jar">
+	<target name="jar-sign" depends="jar,genkey">
 		<mkdir dir="${sign.dir}"/>
 		<signjar destDir="${sign.dir}"
-	        alias="swing" keystore="swing.jks"
-	        storepass="swingpass"
+	        alias="${myalias}" keystore="${mykeystore}"
+	        storepass="${mystorepass}"
 	        preservelastmodified="true">
 	        <path>
 	            <fileset dir="${jar.dir}" includes="**/*.jar" />
