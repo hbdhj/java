@@ -38,6 +38,7 @@ public class HelloWorld
 			byte[] encrypted = new byte[cipher.getOutputSize(input.length)];
 			int enc_len = cipher.update(input, 0, input.length, encrypted, 0);
 			enc_len += cipher.doFinal(encrypted, enc_len);
+			//System.out.println("encrypted = "+ new String(encrypted));
 			System.out.println("encrypted = "+ new String(encrypted,"UTF8"));
 			// decryption
 			cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
