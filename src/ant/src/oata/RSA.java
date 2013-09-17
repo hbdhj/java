@@ -24,6 +24,8 @@ public class RSA {
 		    KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
 		    keyGen.initialize(1024);
 		    KeyPair key = keyGen.generateKeyPair();
+		    System.out.println( "RSA public key = " + new String(key.getPublic().getEncoded(), "UTF8"));
+		    System.out.println( "RSA private key = " + new String(key.getPrivate().getEncoded(), "UTF8"));
 		    System.out.println( "Finish generating RSA key" );
 		    //
 		    // get an RSA cipher object and print the provider   
