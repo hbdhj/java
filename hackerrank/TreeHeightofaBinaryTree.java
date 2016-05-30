@@ -7,7 +7,7 @@ int height(Node root) {
         return height(root.left)+1;
     } else if (root.left==null && root.right!=null){
         return height(root.right)+1;
-    } else (root.left!=null && root.right!=null){
-        return max(height(root.left), height(root.right))+1;
+    } else {
+        return Math.max(height(root.left), height(root.right))+1;
     }
 }
